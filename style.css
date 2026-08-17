@@ -70,3 +70,23 @@ body.lightbox-open{overflow:hidden}
 .lightbox-overlay{position:fixed;inset:0;background:rgba(18,10,12,.93);z-index:1000;display:grid;place-items:center;padding:30px;cursor:zoom-out}
 .lightbox-overlay img{max-width:94vw;max-height:90vh;object-fit:contain;box-shadow:0 20px 70px rgba(0,0,0,.45);cursor:default}
 .lightbox-close{position:absolute;right:22px;top:16px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:30px;cursor:pointer}
+
+/* ===== TIRUMALA / NAADANEERAJANAM FEATURED ARCHIVE ===== */
+.ttd-featured{margin:0 auto 70px;max-width:1400px;border:1px solid var(--line);background:linear-gradient(135deg,#fffdf8,#f7f1e7);box-shadow:0 18px 55px rgba(65,35,25,.08);padding:30px}
+.ttd-featured-intro{max-width:900px;margin:0 auto 28px;text-align:center}
+.ttd-featured-intro h3{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(34px,4vw,52px);line-height:1.05;color:var(--maroon);margin:4px 0 14px}
+.ttd-featured-intro p:not(.eyebrow){font-size:14px;color:var(--muted);max-width:780px;margin:0 auto 16px}
+.ttd-badge{display:inline-block;border:1px solid var(--gold);color:var(--maroon);padding:7px 13px;font-size:9px;letter-spacing:2px;font-weight:800;margin-top:4px}
+.ttd-featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ttd-featured-grid figure{margin:0;background:#fff;border:1px solid var(--line);overflow:hidden}
+.ttd-featured-grid figure img{display:block;width:100%;height:360px;object-fit:contain;background:#eee6dc;transition:transform .3s ease}
+.ttd-featured-grid figure:hover img{transform:scale(1.018)}
+.ttd-featured-grid figcaption{padding:11px 14px;font-size:10px;letter-spacing:.8px;color:var(--muted);text-transform:uppercase}
+@media(max-width:900px){
+  .ttd-featured-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .ttd-featured{padding:18px}
+  .ttd-featured-grid{grid-template-columns:1fr}
+  .ttd-featured-grid figure img{height:auto;max-height:500px}
+}
