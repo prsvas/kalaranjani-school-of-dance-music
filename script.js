@@ -28,8 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
   formLink.href = SITE.enquiryFormUrl;
   document.querySelectorAll(".floating-whatsapp").forEach(el => el.href = whatsappUrl);
   renderVideos(); renderGallery();
-  document.querySelector(".menu-toggle").addEventListener("click", () => document.querySelector(".nav").classList.toggle("open"));
-  document.querySelectorAll(".nav a").forEach(link => link.addEventListener("click", () => document.querySelector(".nav").classList.remove("open")));
+  const menuButton = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+  menuButton.addEventListener("click", () => {
+    const open = nav.classList.toggle("open");
+    menuButton.setAttribute("aria-expanded", String(open));
+  });
+  document.querySelectorAll(".nav a").forEach(link => link.addEventListener("click", () => {
+    nav.classList.remove("open");
+    menuButton.setAttribute("aria-expanded", "false");
+  }));
 });
 
 function renderVideos(){
@@ -41,3 +49,25 @@ function renderGallery(){
   grid.innerHTML=STUDENT_GALLERY.map(([file,caption])=>`<figure><img src="assets/images/gallery/${file}" alt="${escapeHtml(caption)}"><figcaption>${escapeHtml(caption)}</figcaption></figure>`).join("");
 }
 function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+
+
+// Lightweight gallery lightbox
+document.addEventListener("click", (event) => {
+  const img = event.target.closest(".gallery figure img, .student-gallery figure img");
+  if (!img) return;
+  event.preventDefault();
+
+  const overlay = document.createElement("div");
+  overlay.className = "lightbox-overlay";
+  overlay.innerHTML = `<button class="lightbox-close" aria-label="Close image">×</button>
+    <img src="${img.currentSrc || img.src}" alt="${escapeHtml(img.alt || "Kalaranjani gallery image")}">`;
+  document.body.appendChild(overlay);
+  document.body.classList.add("lightbox-open");
+
+  const close = () => {
+    overlay.remove();
+    document.body.classList.remove("lightbox-open");
+  };
+  overlay.addEventListener("click", (e) => { if (e.target === overlay || e.target.classList.contains("lightbox-close")) close(); });
+  document.addEventListener("keydown", function esc(e){ if(e.key==="Escape"){ close(); document.removeEventListener("keydown", esc); }});
+});
