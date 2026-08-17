@@ -38,6 +38,6 @@ function renderVideos(){
 }
 function renderGallery(){
   const grid=document.getElementById("studentGallery");
-  grid.innerHTML=STUDENT_GALLERY.map(([file,caption])=>`<figure><img src="assets/gallery/${file}" alt="${escapeHtml(caption)}"><figcaption>${escapeHtml(caption)}</figcaption></figure>`).join("");
+  grid.innerHTML=STUDENT_GALLERY.map(([file,caption])=>`<figure><img src="assets/images/gallery/${file}" alt="${escapeHtml(caption)}"><figcaption>${escapeHtml(caption)}</figcaption></figure>`).join("");
 }
 function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
